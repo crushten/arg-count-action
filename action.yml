@@ -20,7 +20,11 @@ runs:
       run: |
         echo "ARGCOUNT=`${{ github.action_path }}/count-args.sh ${{ inputs.arguments-to-count }}`" >> $GITHUB_ENV
       shell: bash
-    - id: return-result  
+    - id: get-result  
       run: |
         echo "name=num-args::$(echo ${{ env.ARGCOUNT }})" >> $GITHUB_OUTPUT
+      shell: bash
+    - id: return-result  
+      run: |
+        echo "${{ steps.get-result.outputs.name }}"
       shell: bash
